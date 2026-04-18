@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SalesRecon.io — AI-Powered Sales Battlecards</title>
+  <meta name="description" content="SalesRecon generates real-time AI sales battlecards as you browse prospect websites. Challenger-method talk tracks in seconds." />
+  <link rel="icon" href="salesrecon_favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="salesrecon_favicon_32x32.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-900: #0b1120;
+      --navy-800: #111827;
+      --navy-700: #1a2235;
+      --navy-600: #222d45;
+      --navy-500: #2e3f5c;
+      --blue-500: #1e7bc4;
+      --blue-400: #2e96e0;
+      --blue-300: #4ab8e8;
+      --blue-200: #8ad4f4;
+      --violet-500: #6c47f0;
+      --violet-400: #7c5cf5;
+      --violet-300: #9d82f7;
+      --white: #ffffff;
+      --gray-300: #b0bcd4;
+      --gray-400: #8493b0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--navy-900);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 17, 32, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(74, 184, 232, 0.12);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray-300);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--blue-300); }
+
+    .nav-cta {
+      background: var(--violet-500);
+      color: var(--white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--violet-400) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30, 123, 196, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(108, 71, 240, 0.12) 0%, transparent 60%),
+        var(--navy-900);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(74, 184, 232, 0.07) 1px, transparent 0);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(108, 71, 240, 0.15);
+      border: 1px solid rgba(108, 71, 240, 0.35);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--violet-300);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--violet-400);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-logo {
+      width: min(480px, 90vw);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 720px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--blue-300), var(--violet-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--gray-300);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--violet-500);
+      color: var(--white);
+      text-decoration: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(108, 71, 240, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: var(--violet-400);
+      transform: translateY(-2px);
+      box-shadow: 0 0 36px rgba(108, 71, 240, 0.5);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      color: var(--blue-300);
+      text-decoration: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: 1px solid rgba(74, 184, 232, 0.3);
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue-300);
+      background: rgba(74, 184, 232, 0.07);
+      transform: translateY(-2px);
+    }
+
+    .chrome-icon {
+      width: 22px; height: 22px;
+    }
+
+    /* ── SCREENSHOT ── */
+    .screenshot-wrap {
+      margin-top: 3.5rem;
+      position: relative;
+    }
+
+    .screenshot-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(74, 184, 232, 0.3), rgba(108, 71, 240, 0.3));
+      z-index: 0;
+    }
+
+    .screenshot-wrap img {
+      position: relative;
+      z-index: 1;
+      width: min(340px, 90vw);
+      border-radius: 14px;
+      display: block;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--blue-300), var(--violet-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-sub {
+      color: var(--gray-300);
+      font-size: 1.05rem;
+      max-width: 560px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-section {
+      background: var(--navy-800);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      background: var(--navy-700);
+      border: 1px solid rgba(74, 184, 232, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .step:hover {
+      border-color: rgba(74, 184, 232, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .step-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue-300), var(--violet-300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      color: var(--gray-300);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: var(--navy-700);
+      border: 1px solid rgba(108, 71, 240, 0.12);
+      border-radius: 12px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(108, 71, 240, 0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(108, 71, 240, 0.12);
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, rgba(30, 123, 196, 0.2), rgba(108, 71, 240, 0.2));
+      border: 1px solid rgba(74, 184, 232, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--white);
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--gray-300);
+      line-height: 1.6;
+    }
+
+    /* ── CHALLENGER ── */
+    .challenger-section {
+      background: var(--navy-800);
+    }
+
+    .challenger-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .challenger-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .challenger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .challenger-list li {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, var(--blue-400), var(--violet-500));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
+    .challenger-list span {
+      color: var(--gray-300);
+      font-size: 0.95rem;
+    }
+
+    .battlecard-demo {
+      background: var(--navy-700);
+      border: 1px solid rgba(74, 184, 232, 0.15);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .battlecard-header {
+      background: var(--navy-600);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(74, 184, 232, 0.1);
+    }
+
+    .battlecard-header img {
+      height: 22px;
+    }
+
+    .battlecard-header span {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--blue-300);
+    }
+
+    .battlecard-body {
+      padding: 1.25rem;
+    }
+
+    .bc-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-400);
+      margin-bottom: 0.25rem;
+    }
+
+    .bc-value {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .bc-section {
+      background: var(--navy-800);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.85rem;
+      border-left: 2px solid var(--violet-500);
+    }
+
+    .bc-section-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--violet-300);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+
+    .bc-section-text {
+      font-size: 0.85rem;
+      color: var(--gray-300);
+      line-height: 1.5;
+    }
+
+    .bc-run-btn {
+      width: 100%;
+      background: var(--violet-500);
+      border: none;
+      color: var(--white);
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 0.7rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 50%, rgba(108, 71, 240, 0.15) 0%, transparent 70%),
+        var(--navy-900);
+    }
+
+    .cta-section .section-title {
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+
+    .cta-section .section-sub {
+      margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-800);
+      border-top: 1px solid rgba(74, 184, 232, 0.1);
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo img {
+      height: 28px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--gray-400);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--blue-300); }
+
+    .footer-copy {
+      color: var(--gray-400);
+      font-size: 0.82rem;
+    }
+
+    /* ── RESPONSIVE NAV ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="salesrecon_favicon_32x32.png" alt="SalesRecon" />
+    <span style="font-weight:700; font-size:1rem; color:var(--white);">SalesRecon<span style="color:var(--blue-300);">.io</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="https://chromewebstore.google.com/detail/pljgmibplgmjghblbcfnggahbigpbhnj" target="_blank" rel="noopener" class="nav-cta">Get Started — $39/mo</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">New · Version 2.1</div>
+  <img src="salesrecon_logo_marquee_1400x560.png" alt="SalesRecon.io — AI-Powered Sales Battlecards" class="hero-logo" />
+  <h1>Win More Deals with<br /><span>Real-Time AI Battlecards</span></h1>
+  <p>SalesRecon analyzes your prospect's website as you browse and instantly generates Challenger-method talk tracks — so you walk into every call fully armed.</p>
+  <div class="hero-actions">
+    <a href="https://chromewebstore.google.com/detail/pljgmibplgmjghblbcfnggahbigpbhnj" target="_blank" rel="noopener" class="btn-primary">
+      <svg class="chrome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="4" fill="white"/>
+        <path d="M12 8h9.5M5.5 19.5 9.8 12M14.2 12 9.8 19.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+      </svg>
+      Add to Chrome — $39/mo
+    </a>
+    <a href="#how-it-works" class="btn-secondary">
+      See How It Works ↓
+    </a>
+  </div>
+  <div class="screenshot-wrap">
+    <img src="extension_view_with_example.png" alt="SalesRecon extension showing a battlecard for coca-cola.com" />
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-label">Simple by design</div>
+    <h2 class="section-title">Three steps to <span>sales-ready intelligence</span></h2>
+    <p class="section-sub">No setup, no CRM integration required. SalesRecon works right inside your browser.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Browse to your prospect</h3>
+        <p>Navigate to any company's website — a lead from your CRM, an inbound form fill, or a cold outreach target. SalesRecon activates automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Enter what you're selling</h3>
+        <p>Type in your product or service. SalesRecon uses that context to tailor the battlecard specifically to your offering and the prospect's world.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Run Recon — get your battlecard</h3>
+        <p>Hit "Run Recon" and receive a Challenger-method battlecard with industry insights, commercial threads, and tailored talk tracks in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-label">Everything you need</div>
+    <h2 class="section-title">Built for reps who <span>hate losing</span></h2>
+    <p class="section-sub">Every feature is designed to close the gap between opening a prospect tab and walking into the call.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Deep Industry Reconnaissance</h3>
+        <p>SalesRecon goes beyond surface-level page content to identify the prospect's industry, competitive pressures, and strategic priorities.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Instant Battlecard Generation</h3>
+        <p>Get a full battlecard in seconds — no waiting, no copy-pasting into ChatGPT, no research rabbit holes. It's ready when you are.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Challenger Sales Methodology</h3>
+        <p>Talk tracks are structured around the Challenger model — teaching, tailoring, and taking control of the sale with insight-led conversation.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>Copy &amp; Export Ready</h3>
+        <p>Copy your battlecard to clipboard or export as a PDF for pre-call prep docs, manager review, or team sharing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Your data is used only for battlecard generation. It's never sold to third parties or used for any purpose outside your session.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Works on Any Website</h3>
+        <p>SMB, mid-market, enterprise — analyze any prospect's website regardless of industry, size, or geography.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGER METHODOLOGY -->
+<section class="challenger-section" id="methodology">
+  <div class="container">
+    <div class="challenger-inner">
+      <div>
+        <div class="section-label">Backed by research</div>
+        <h2 class="section-title">The <span>Challenger Sale</span> methodology, automated</h2>
+        <p class="section-sub" style="margin-top:0.75rem;">The #1 predictor of high B2B sales performance isn't relationship-building — it's the ability to teach, tailor, and take control. SalesRecon automates the hardest part: the research.</p>
+        <ul class="challenger-list">
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong style="color:var(--white);">Teach</strong> — arrive with a commercial insight your prospect hasn't considered</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong style="color:var(--white);">Tailor</strong> — talk tracks adapted to their specific industry and pain points</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong style="color:var(--white);">Take Control</strong> — guide the conversation with confidence from minute one</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong style="color:var(--white);">Save Hours</strong> — what used to take 45 minutes of research now takes 10 seconds</span>
+          </li>
+        </ul>
+      </div>
+      <div class="battlecard-demo">
+        <div class="battlecard-header">
+          <img src="salesrecon_favicon_32x32.png" alt="SalesRecon" />
+          <span>Sales Recon</span>
+        </div>
+        <div class="battlecard-body">
+          <div class="bc-label">Selling</div>
+          <div class="bc-value">office supplies</div>
+          <div class="bc-label">Page Scanned</div>
+          <div class="bc-value" style="margin-bottom:1.25rem;">coca-cola.com · Home Page</div>
+          <div class="bc-section">
+            <div class="bc-section-title">Commercial Thread</div>
+            <div class="bc-section-text">Coca-Cola's 2025 sustainability pledge to use 50% recycled packaging creates upstream pressure on all office supply spend—position your eco-certified line as aligned to their public commitments.</div>
+          </div>
+          <div class="bc-section">
+            <div class="bc-section-title">Talk Track Opener</div>
+            <div class="bc-section-text">"Most of our clients in beverage manufacturing tell us their procurement teams are under pressure to align every supplier with ESG goals — is that something you're navigating right now?"</div>
+          </div>
+          <div class="bc-section" style="border-left-color: var(--blue-400);">
+            <div class="bc-section-title" style="color:var(--blue-300);">Competitive Edge</div>
+            <div class="bc-section-text">Highlight carbon-neutral delivery and FSC-certified products as differentiators your competitors haven't brought to the conversation.</div>
+          </div>
+          <button class="bc-run-btn" disabled>
+            ✦ Run Recon
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="section-label">$39 / month</div>
+    <h2 class="section-title">Start your next call <span>more prepared than ever</span></h2>
+    <p class="section-sub">Add SalesRecon to Chrome and generate your first battlecard in under a minute. $39/month, cancel anytime.</p>
+    <div class="cta-actions">
+      <a href="https://chromewebstore.google.com/detail/pljgmibplgmjghblbcfnggahbigpbhnj" target="_blank" rel="noopener" class="btn-primary">
+        <svg class="chrome-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="4" fill="white"/>
+          <path d="M12 8h9.5M5.5 19.5 9.8 12M14.2 12 9.8 19.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+        </svg>
+        Get Started — $39/mo
+      </a>
+    </div>
+    <p style="margin-top:1.25rem; font-size:0.82rem; color:var(--gray-400);">
+      Developed by Gentoolink Web Services Inc. &middot; Vanderhoof, BC, Canada
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-logo">
+      <img src="salesrecon_logo_marquee_1400x560.png" alt="SalesRecon.io" />
+    </a>
+    <ul class="footer-links">
+      <li><a href="https://chromewebstore.google.com/detail/pljgmibplgmjghblbcfnggahbigpbhnj" target="_blank" rel="noopener">Chrome Web Store</a></li>
+      <li><a href="mailto:support@salesrecon.io">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Gentoolink Web Services Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
