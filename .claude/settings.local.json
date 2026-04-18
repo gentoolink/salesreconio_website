@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(python -c ' *)",
+      "Bash(pdftotext \"Sales Recon – coca-cola.com.pdf\" -)",
+      "Bash(pdftotext \"Sales Recon – shop.lululemon.com.pdf\" -)"
+    ]
+  }
+}

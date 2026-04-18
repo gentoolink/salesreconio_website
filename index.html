@@ -521,6 +521,64 @@
       margin-top: 0.5rem;
     }
 
+    .bc-brief {
+      background: rgba(108, 71, 240, 0.1);
+      border: 1px solid rgba(108, 71, 240, 0.25);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .bc-brief-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--violet-300);
+      margin-bottom: 0.5rem;
+    }
+
+    .bc-brief-row {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.3rem;
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .bc-brief-key {
+      font-weight: 700;
+      color: var(--blue-300);
+      flex-shrink: 0;
+    }
+
+    .bc-brief-val {
+      color: var(--gray-300);
+    }
+
+    .bc-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .bc-tab {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+      background: var(--navy-800);
+      border: 1px solid rgba(74, 184, 232, 0.2);
+      color: var(--gray-300);
+    }
+
+    .bc-tab.active {
+      background: rgba(74, 184, 232, 0.12);
+      border-color: var(--blue-300);
+      color: var(--blue-300);
+    }
+
     /* ── CTA ── */
     .cta-section {
       text-align: center;
@@ -667,34 +725,44 @@
     <p class="section-sub">Every feature is designed to close the gap between opening a prospect tab and walking into the call.</p>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h3>Deep Industry Reconnaissance</h3>
-        <p>SalesRecon goes beyond surface-level page content to identify the prospect's industry, competitive pressures, and strategic priorities.</p>
+        <div class="feature-icon">⚡</div>
+        <h3>30-Second Brief</h3>
+        <p>Every battlecard opens with a Hook, Pain, and Ask — a ready-to-deliver cold opener you can use before you even say hello.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Instant Battlecard Generation</h3>
-        <p>Get a full battlecard in seconds — no waiting, no copy-pasting into ChatGPT, no research rabbit holes. It's ready when you are.</p>
+        <div class="feature-icon">💡</div>
+        <h3>Commercial Insight Opening</h3>
+        <p>A researched, provocative insight tied to the prospect's public commitments and industry pressures — so you teach before you pitch.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔎</div>
+        <h3>Hypothesis of Pain</h3>
+        <p>Identifies the Signal (what they've publicly stated), the Hidden Cost (what they haven't connected yet), and the Reframe that repositions your offering.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
-        <h3>Challenger Sales Methodology</h3>
-        <p>Talk tracks are structured around the Challenger model — teaching, tailoring, and taking control of the sale with insight-led conversation.</p>
+        <h3>Kill the Status Quo Questions</h3>
+        <p>Cold opener and discovery questions designed to surface urgency, expose the cost of inaction, and create logical pressure on the incumbent vendor.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3>Objection Redirect</h3>
+        <p>Pre-built responses to the most likely objection — tailored to the specific prospect — so you're never caught flat-footed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚔️</div>
+        <h3>Competitive Intel &amp; Wedge</h3>
+        <p>Identifies the prospect's primary competitor's move and gives you a specific wedge to differentiate — referenced from real industry signals.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">📋</div>
-        <h3>Copy &amp; Export Ready</h3>
-        <p>Copy your battlecard to clipboard or export as a PDF for pre-call prep docs, manager review, or team sharing.</p>
+        <h3>Copy &amp; Export to PDF</h3>
+        <p>Copy to clipboard or export as a PDF for pre-call prep, manager review, or team sharing — with cited sources included.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">🔒</div>
         <h3>Privacy First</h3>
-        <p>Your data is used only for battlecard generation. It's never sold to third parties or used for any purpose outside your session.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🌐</div>
-        <h3>Works on Any Website</h3>
-        <p>SMB, mid-market, enterprise — analyze any prospect's website regardless of industry, size, or geography.</p>
+        <p>Your data is used only to generate your battlecard. It is never sold or used outside your session.</p>
       </div>
     </div>
   </div>
@@ -733,22 +801,43 @@
           <span>Sales Recon</span>
         </div>
         <div class="battlecard-body">
-          <div class="bc-label">Selling</div>
-          <div class="bc-value">office supplies</div>
           <div class="bc-label">Page Scanned</div>
-          <div class="bc-value" style="margin-bottom:1.25rem;">coca-cola.com · Home Page</div>
-          <div class="bc-section">
-            <div class="bc-section-title">Commercial Thread</div>
-            <div class="bc-section-text">Coca-Cola's 2025 sustainability pledge to use 50% recycled packaging creates upstream pressure on all office supply spend—position your eco-certified line as aligned to their public commitments.</div>
+          <div class="bc-value">coca-cola.com &nbsp;·&nbsp; Home Page | Coca-Cola CA</div>
+          <div class="bc-label">Selling</div>
+          <div class="bc-value" style="margin-bottom:1rem;">Eco-friendly janitorial supplies</div>
+
+          <div class="bc-brief">
+            <div class="bc-brief-title">⚡ 30-Second Brief</div>
+            <div class="bc-brief-row">
+              <span class="bc-brief-key">Hook:</span>
+              <span class="bc-brief-val">Coca-Cola Canada has committed to 100% waste diversion in manufacturing by end of 2026 — every consumable entering their plants is under audit.</span>
+            </div>
+            <div class="bc-brief-row">
+              <span class="bc-brief-key">Pain:</span>
+              <span class="bc-brief-val">Legacy janitorial supplies create toxic runoff and non-recyclable waste, directly undermining their 2026 ESG audit.</span>
+            </div>
+            <div class="bc-brief-row">
+              <span class="bc-brief-key">Ask:</span>
+              <span class="bc-brief-val">"I'd like to share how we're helping CPG leaders close the 'facility-compliance gap' before your 2026 zero-waste deadline."</span>
+            </div>
           </div>
+
+          <div class="bc-tabs">
+            <span class="bc-tab active">Commercial Insight</span>
+            <span class="bc-tab">Hypothesis of Pain</span>
+            <span class="bc-tab">Kill the Status Quo</span>
+            <span class="bc-tab">Objection Redirect</span>
+          </div>
+
           <div class="bc-section">
-            <div class="bc-section-title">Talk Track Opener</div>
-            <div class="bc-section-text">"Most of our clients in beverage manufacturing tell us their procurement teams are under pressure to align every supplier with ESG goals — is that something you're navigating right now?"</div>
+            <div class="bc-section-title">The Commercial Insight Opening</div>
+            <div class="bc-section-text">Coca-Cola Canada is driving toward 100% waste diversion by 2026 — yet high-VOC or non-biodegradable cleaning agents at the plant level create a <em>Strategic Posture Gap</em> between their ESG targets and daily operations. Your biggest risk isn't supply cost — it's a failed audit from "invisible" chemical waste.</div>
           </div>
           <div class="bc-section" style="border-left-color: var(--blue-400);">
-            <div class="bc-section-title" style="color:var(--blue-300);">Competitive Edge</div>
-            <div class="bc-section-text">Highlight carbon-neutral delivery and FSC-certified products as differentiators your competitors haven't brought to the conversation.</div>
+            <div class="bc-section-title" style="color:var(--blue-300);">Cold Opener</div>
+            <div class="bc-section-text">"With your 2026 zero-waste deadline approaching, how is your facilities team vetting the chemical runoff generated by your current janitorial vendors?"</div>
           </div>
+
           <button class="bc-run-btn" disabled>
             ✦ Run Recon
           </button>
