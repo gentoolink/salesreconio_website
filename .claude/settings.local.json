@@ -4,7 +4,14 @@
       "Bash(python3 -c ' *)",
       "Bash(python -c ' *)",
       "Bash(pdftotext \"Sales Recon – coca-cola.com.pdf\" -)",
-      "Bash(pdftotext \"Sales Recon – shop.lululemon.com.pdf\" -)"
+      "Bash(pdftotext \"Sales Recon – shop.lululemon.com.pdf\" -)",
+      "Bash(ffmpeg -version)",
+      "Bash(ffprobe -v quiet -print_format json -show_streams \"/c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demo-video.mp4\")",
+      "Bash(gifsicle --version)",
+      "Bash(ffprobe -v quiet -print_format json -show_streams \"/c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demooutput.gif\")",
+      "Bash(ffmpeg -i /c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demooutput.gif -vf fps=10,scale=960:-1:flags=lanczos,palettegen=max_colors=128:stats_mode=diff -y /tmp/palette.png)",
+      "Bash(ffmpeg -i /c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demooutput.gif -vf fps=10,scale=960:-1:flags=lanczos,palettegen=max_colors=128:stats_mode=diff -update 1 -y /tmp/palette.png)",
+      "Bash(ffmpeg -i /c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demooutput.gif -i /tmp/palette.png -filter_complex 'fps=10,scale=960:-1:flags=lanczos[v];[v][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle' -y /c/Users/ken/OneDrive/Documents/Github/salesreconio_website/examples/demooutput-opt.gif)"
     ]
   }
 }

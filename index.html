@@ -731,6 +731,103 @@
       font-size: 0.82rem;
     }
 
+    /* ── DEMO SECTION ── */
+    .demo-section {
+      background: var(--navy-900);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .demo-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .demo-video-wrap {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(74, 184, 232, 0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      background: var(--navy-800);
+    }
+
+    .demo-video-wrap video {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+    }
+
+    .demo-gif-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(108, 71, 240, 0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      background: var(--navy-800);
+    }
+
+    .demo-gif-wrap img {
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+    }
+
+    .demo-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 0.6rem;
+    }
+
+    .demo-reports {
+      margin-top: 3rem;
+    }
+
+    .demo-reports-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .report-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .report-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--navy-700);
+      border: 1px solid rgba(74, 184, 232, 0.2);
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      color: var(--blue-300);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .report-link:hover {
+      border-color: var(--blue-300);
+      background: rgba(74, 184, 232, 0.07);
+      transform: translateY(-2px);
+    }
+
+    .report-link svg {
+      flex-shrink: 0;
+    }
+
     /* ── RESPONSIVE NAV ── */
     @media (max-width: 640px) {
       .nav-links { display: none; }
@@ -747,6 +844,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#demo">Demo</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#install">Install</a></li>
@@ -799,6 +897,53 @@
         <div class="step-number">03</div>
         <h3>Run Recon — get your battlecard</h3>
         <p>Hit "Run Recon" and receive a Challenger-method battlecard with industry insights, commercial threads, and tailored talk tracks in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="demo-section" id="demo">
+  <div class="container">
+    <div class="section-label">See it in action</div>
+    <h2 class="section-title">Watch SalesRecon <span>generate a live battlecard</span></h2>
+    <p class="section-sub">Browse to a prospect's website, enter what you're selling, and get a full Challenger-method battlecard in seconds.</p>
+
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">Full walkthrough video</div>
+        <div class="demo-video-wrap">
+          <video controls preload="metadata" poster="extension_view_with_example.png">
+            <source src="examples/demo-video.mp4" type="video/mp4" />
+            Your browser does not support video playback.
+          </video>
+        </div>
+      </div>
+      <div>
+        <div class="demo-label">Sample output — animated</div>
+        <div class="demo-gif-wrap">
+          <img src="examples/demooutput.gif" alt="SalesRecon generating a battlecard in real time" loading="lazy" />
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-reports">
+      <div class="demo-reports-title">Download sample PDF reports</div>
+      <div class="report-links">
+        <a href="examples/Sales Recon – coca-cola.com.pdf" target="_blank" rel="noopener" class="report-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#4ab8e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="14 2 14 8 20 8" stroke="#4ab8e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Sales Recon — coca-cola.com
+        </a>
+        <a href="examples/Sales Recon – shop.lululemon.com.pdf" target="_blank" rel="noopener" class="report-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#4ab8e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="14 2 14 8 20 8" stroke="#4ab8e8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Sales Recon — shop.lululemon.com
+        </a>
       </div>
     </div>
   </div>
