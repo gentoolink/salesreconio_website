@@ -579,6 +579,92 @@
       color: var(--blue-300);
     }
 
+    /* ── INSTALL ── */
+    .install-section {
+      background: var(--navy-900);
+    }
+
+    .install-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .install-steps::before {
+      content: '';
+      position: absolute;
+      top: 36px;
+      left: calc(12.5% + 36px);
+      right: calc(12.5% + 36px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-500), var(--violet-500));
+      z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .install-steps::before { display: none; }
+      .install-steps { gap: 1.5rem; }
+    }
+
+    .install-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .install-icon {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--navy-700);
+      border: 2px solid rgba(74, 184, 232, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .install-step:nth-child(1) .install-icon { border-color: var(--blue-400); background: rgba(30, 123, 196, 0.12); }
+    .install-step:nth-child(2) .install-icon { border-color: var(--blue-300); background: rgba(74, 184, 232, 0.1); }
+    .install-step:nth-child(3) .install-icon { border-color: var(--violet-400); background: rgba(108, 71, 240, 0.12); }
+    .install-step:nth-child(4) .install-icon { border-color: var(--violet-300); background: rgba(157, 130, 247, 0.1); }
+
+    .install-step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .install-step p {
+      font-size: 0.87rem;
+      color: var(--gray-300);
+      line-height: 1.55;
+    }
+
+    .stripe-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+      background: var(--navy-700);
+      border: 1px solid rgba(74, 184, 232, 0.15);
+      border-radius: 8px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.85rem;
+      color: var(--gray-300);
+    }
+
+    .stripe-badge svg {
+      flex-shrink: 0;
+    }
+
     /* ── CTA ── */
     .cta-section {
       text-align: center;
@@ -663,6 +749,7 @@
     <li><a href="#how-it-works">How It Works</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#install">Install</a></li>
     <li><a href="https://chromewebstore.google.com/detail/pljgmibplgmjghblbcfnggahbigpbhnj" target="_blank" rel="noopener" class="nav-cta">Get Started — $39/mo</a></li>
   </ul>
 </nav>
@@ -843,6 +930,56 @@
           </button>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO INSTALL -->
+<section class="install-section" id="install">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Up and running in minutes</div>
+    <h2 class="section-title">How to <span>get started</span></h2>
+    <p class="section-sub" style="margin: 0 auto;">Four simple steps — no configuration, no onboarding call required.</p>
+
+    <div class="install-steps">
+      <div class="install-step">
+        <div class="install-icon">🚀</div>
+        <h3>Click Get Started</h3>
+        <p>Hit any "Get Started" button on this page to open the SalesRecon listing on the Chrome Web Store.</p>
+      </div>
+      <div class="install-step">
+        <div class="install-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="5" fill="#4ab8e8"/>
+            <path d="M14 9h11M6.4 22.6 11.4 14M16.6 14l-5 8.6" stroke="#4ab8e8" stroke-width="2.2" stroke-linecap="round"/>
+            <circle cx="14" cy="14" r="11.5" stroke="#4ab8e8" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Add to Chrome</h3>
+        <p>Click <strong style="color:var(--white);">Add to Chrome</strong> on the Chrome Web Store page. The extension installs in seconds.</p>
+      </div>
+      <div class="install-step">
+        <div class="install-icon">💳</div>
+        <h3>Subscribe</h3>
+        <p>Once installed, the extension will guide you to complete your subscription. $39/month, cancel anytime.</p>
+      </div>
+      <div class="install-step">
+        <div class="install-icon">⚡</div>
+        <h3>Run Your First Recon</h3>
+        <p>Navigate to any prospect's website, enter what you're selling, hit <strong style="color:var(--white);">Run Recon</strong> — your battlecard is ready.</p>
+      </div>
+    </div>
+
+    <div class="stripe-badge">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="6" width="18" height="13" rx="2" stroke="#4ab8e8" stroke-width="1.8"/>
+        <path d="M3 10h18" stroke="#4ab8e8" stroke-width="1.8"/>
+      </svg>
+      Payments processed securely by
+      <svg width="42" height="18" viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:2px;">
+        <text x="0" y="19" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#b0bcd4" letter-spacing="-0.5">stripe</text>
+      </svg>
+      — your card details never touch our servers.
     </div>
   </div>
 </section>
